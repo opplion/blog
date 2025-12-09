@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]  # 只有推送到 main 分支时才触发部署，防止测试代码误上线
 
 env:
-  IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/blog
+  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/blog
 
 jobs:
   build-and-deploy:
