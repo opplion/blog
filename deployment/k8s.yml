@@ -1,0 +1,47 @@
+# Deployment - 部署博客应用
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog
+  labels:
+    app: blog
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      labels:
+        app: blog
+    spec:
+      containers:
+      - name: blog-container
+        image: docker.io/arrlink21/blog:latest
+        ports:
+        - containerPort: 80
+        # 添加资源限制
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "200m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+---
+# Service - 暴露博客应用
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-service
+  labels:
+    app: blog
+  namespace: default
+spec:
+  selector:
+    app: blog
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80

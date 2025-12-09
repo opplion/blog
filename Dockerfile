@@ -10,10 +10,7 @@ FROM nginx:alpine
 COPY --from=builder /blog/public /usr/share/nginx/html
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY sona-nyl.cn.pem /etc/nginx/ssl/sona-nyl.cn.pem
-COPY sona-nyl.cn.key /etc/nginx/ssl/sona-nyl.cn.key
 
 EXPOSE 80
-EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]
