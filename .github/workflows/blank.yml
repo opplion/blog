@@ -44,5 +44,5 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f deployment/
-          kubectl set image deployment/blog-deployment blog-container=${{ env.IMAGE_NAME }}:${{ github.sha }}
-          kubectl rollout status deployment/blog-deployment
+          kubectl set image deployment/blog blog-container=${{ env.IMAGE_NAME }}:${{ github.sha }}
+          kubectl rollout status deployment/blog
