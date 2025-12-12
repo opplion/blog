@@ -2,7 +2,7 @@ name: Build and Deploy to K8s
 
 on:
   push:
-    branches: [ "main" ]  # 只有推送到 main 分支时才触发部署，防止测试代码误上线
+    branches: [ "main" ]
 
 env:
   IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/blog
