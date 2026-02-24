@@ -6,9 +6,9 @@ on:
 
 env:
   # 阿里云仓库地址，例如 registry.cn-hangzhou.aliyuncs.com
-  REGISTRY: ${{ secrets.ALIBABA_CLOUD_REGISTRY }}
+  REGISTRY: ${{ secrets.ALIYUN_REGISTRY }}
   # 仓库命名空间/镜像名称
-  IMAGE_NAME: ${{ secrets.ALIBABA_CLOUD_NAMESPACE }}/blog
+  IMAGE_NAME: ${{ secrets.ALIYUN_NAMESPACE }}/blog
 
 jobs:
   build-and-deploy:
@@ -27,8 +27,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ secrets.ALIBABA_CLOUD_USERNAME }}
-          password: ${{ secrets.ALIBABA_CLOUD_PASSWORD }}
+          username: ${{ secrets.ALIYUN_USERNAME }}
+          password: ${{ secrets.ALIYUN_PASSWORD }}
 
       # 4. 构建并推送到阿里云
       - name: Build and push Docker image
