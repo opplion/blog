@@ -8,7 +8,7 @@ menu:
 banner: http://sona-nyl.oss-cn-hangzhou.aliyuncs.com/img/banner.webp
 
 # 站点通知信息
-notice: 
+notice: 集群迁移至本地，稳定性可能不如云服务器
 
 # 作者信息
 author:
