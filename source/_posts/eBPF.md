@@ -1,7 +1,7 @@
 ---
 title: eBPF 内核观测
 date: 2026-11-20 15:58:14
-cover: https://bauerfe.bauerworld.de/wp-content/uploads/2020/07/headershelf.jpg
+cover: http://sona-nyl.oss-cn-hangzhou.aliyuncs.com/img/11.webp
 tags: linux
 ---
 
