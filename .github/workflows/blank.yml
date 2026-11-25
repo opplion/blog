@@ -2,10 +2,10 @@ name: Build and Deploy to Aliyun ACR
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
-  # 阿里云仓库地址，例如 registry.cn-hangzhou.aliyuncs.com
+  # 阿里云仓库地址
   REGISTRY: ${{ secrets.ALIYUN_REGISTRY }}
   # 仓库命名空间/镜像名称
   IMAGE_NAME: ${{ secrets.ALIYUN_NAMESPACE }}/blog
@@ -18,7 +18,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. 设置 Docker Buildx (支持多架构构建和缓存)
+      # 2. 设置 Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -30,14 +30,20 @@ jobs:
           username: ${{ secrets.ALIYUN_USERNAME }}
           password: ${{ secrets.ALIYUN_PASSWORD }}
 
-      # 4. 构建并推送到阿里云
+      # 4. 构建并推送镜像
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          # 生成的 Tag 格式：registry.cn-hangzhou.aliyuncs.com/namespace/blog:latest
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+          # 关闭 OCI 构建证明，解决部分仓库兼容性问题
+          provenance: false
+          sbom: false
+
+          # GitHub Actions 构建缓存
           cache-from: type=gha
           cache-to: type=gha,mode=max
